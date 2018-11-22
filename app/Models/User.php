@@ -26,4 +26,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * 主键名称
+     *
+     * @var string
+     */
+    protected $primaryKey = 'uid';
 }

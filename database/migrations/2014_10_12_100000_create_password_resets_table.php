@@ -3,9 +3,12 @@
 use App\Models\PasswordResets;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends BaseMigration
+class CreatePasswordResetsTable extends Migration
 {
+
+    protected $table;
 
     /**
      * CreatePasswordResetsTable constructor.
