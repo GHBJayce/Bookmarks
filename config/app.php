@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'zh-cn',
 
     /*
     |--------------------------------------------------------------------------
@@ -210,5 +210,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    'per_page_num' => '10',
 
 ];
