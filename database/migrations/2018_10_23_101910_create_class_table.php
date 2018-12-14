@@ -18,6 +18,7 @@ class CreateClassTable extends Migration
             $table->integer('uid')->unsigned();
             $table->string('name');
             $table->integer('pid')->default(0)->unsigned();
+            $table->smallInteger('sort')->nullable()->default(0);
             $table->timestamps();
 
             $table->index('uid');

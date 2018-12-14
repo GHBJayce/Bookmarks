@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('bm_class', 'BmClassController');
+
+Route::resource('bookmarks', 'BookMarksController');

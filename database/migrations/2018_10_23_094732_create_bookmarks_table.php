@@ -21,8 +21,7 @@ class CreateBookmarksTable extends Migration
             $table->integer('uid')->unsigned();
             $table->string('title', 30)->nullable();
             $table->string('url');
-            $table->smallInteger('sort')->nullable();
-            $table->mediumInteger('access_num')->default(0);
+            $table->mediumInteger('access_num')->nullable()->default(0);
             $table->integer('last_access_time')->nullable()->unsigned();
             $table->tinyInteger('is_like')->default(0);
             $table->timestamps();
