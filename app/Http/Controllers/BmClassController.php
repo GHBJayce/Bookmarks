@@ -59,16 +59,20 @@ class BmClassController extends Controller
      *
      * @param int $id
      * @param BmClassRequest $request
+     * @param BmClass $model_class
      * @return \Illuminate\Http\Response
      */
-    public function update($id, BmClassRequest $request)
+    public function update($id, BmClassRequest $request, BmClass $model_class)
     {
         $response = $this->error('更新失败');
+
+        $data = $model_class->fill($request->all())->toArray();
+
         if (
-            BmClass::where([
+            $model_class->where([
                 'uid' => Auth::id(),
-                (new BmClass())->getKeyName() => $id,
-            ])->update($request->all())
+                $model_class->getKeyName() => $id,
+            ])->update($data)
         ) {
             $response = $this->success('更新成功');
         }

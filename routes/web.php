@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('bm_class', 'BmClassController');
+Route::middleware('auth')->resource('bm_class', 'BmClassController');
 
-Route::resource('bookmarks', 'BookMarksController');
+Route::middleware('auth')->resource('bookmarks', 'BookMarksController');
+
+Route::middleware('auth')->get('/access/{id}', 'BookMarksController@access');

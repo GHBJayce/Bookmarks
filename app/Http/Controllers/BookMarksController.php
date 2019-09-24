@@ -92,14 +92,47 @@ class BookMarksController extends Controller
     }
 
     /**
-     * 访问书签
+     * 书签访问量+1
      *
-     * @param int $id
+     * @param $id
+     * @return bool
      */
-    public function accessBookmarks($id)
+    protected function accessBookmarks($id)
     {
-        $bookmark = Bookmarks::find($id)->increment('access_num');
+        $result = false;
+
+        $bookmark = Bookmarks::find($id);
         $bookmark->last_access_time = time();
-        $bookmark->save();
+
+        if ($bookmark->save() && $bookmark->increment('access_num')) {
+            $result = $bookmark->url;
+        }
+
+        return $result;
+    }
+
+    /**
+     * 跳转网页代理 访问量+1
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function access($id/*, Request $request*/)
+    {
+        /*
+        $validator = Validator::make($request->all(), [
+            'target' => 'required|url',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($this->error($validator->errors()->first(), $validator->errors()));
+        }
+        */
+
+        if ($target = $this->accessBookmarks($id)) {
+            header("Location:{$target}");
+        } else {
+            return response()->json($this->error('操作失败'));
+        }
     }
 }
