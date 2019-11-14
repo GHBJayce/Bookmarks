@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BmClassRequest;
-use App\Models\BmClass;
+use App\Http\Requests\ClassesRequest;
+use App\Models\Classes;
 use Illuminate\Support\Facades\Auth;
 
-class BmClassController extends Controller
+class ClassesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @param BmClass $bm_class
+     * @param Classes $bm_class
      * @return \Illuminate\Http\Response
      */
-    public function index(BmClass $bm_class)
+    public function index(Classes $bm_class)
     {
         $uid = Auth::id();
         $data = $bm_class::where('uid', $uid)->paginate($this->per_page_num);
@@ -25,11 +25,11 @@ class BmClassController extends Controller
     /**
      * 创建书签分类
      *
-     * @param BmClassRequest $request
-     * @param BmClass $bm_class
+     * @param ClassesRequest $request
+     * @param Classes $bm_class
      * @return mixed
      */
-    public function store(BmClassRequest $request, BmClass $bm_class)
+    public function store(ClassesRequest $request, Classes $bm_class)
     {
         $data = array_merge($request->all(), ['uid' => Auth::id()]);
 
@@ -49,7 +49,7 @@ class BmClassController extends Controller
      */
     public function show($id)
     {
-        $data = BmClass::where('uid', Auth::id())->find($id);
+        $data = Classes::where('uid', Auth::id())->find($id);
 
         return response()->json($this->returnData($data));
     }
@@ -58,11 +58,11 @@ class BmClassController extends Controller
      * Update the specified resource in storage.
      *
      * @param int $id
-     * @param BmClassRequest $request
-     * @param BmClass $model_class
+     * @param ClassesRequest $request
+     * @param Classes $model_class
      * @return \Illuminate\Http\Response
      */
-    public function update($id, BmClassRequest $request, BmClass $model_class)
+    public function update($id, ClassesRequest $request, Classes $model_class)
     {
         $response = $this->error('更新失败');
 
@@ -90,7 +90,7 @@ class BmClassController extends Controller
     {
         $response = $this->error('删除失败');
 
-        if (BmClass::destroy($id)) {
+        if (Classes::destroy($id)) {
             $response = $this->success('删除成功');
         }
 

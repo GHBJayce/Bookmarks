@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassAssocTable extends Migration
+class CreateClassAssocsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateClassAssocTable extends Migration
      */
     public function up()
     {
-        Schema::create('class_assoc', function (Blueprint $table) {
+        Schema::create('class_assocs', function (Blueprint $table) {
             $table->increments('ca_id');
             $table->integer('uid')->unsigned();
             $table->integer('cid')->unsigned();
             $table->integer('bm_id')->unsigned();
-            $table->timestamps();
 
             $table->index(['uid', 'cid', 'bm_id']);
 
@@ -35,6 +34,6 @@ class CreateClassAssocTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_assoc');
+        Schema::dropIfExists('class_assocs');
     }
 }
