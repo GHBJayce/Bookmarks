@@ -11,13 +11,13 @@ class ClassesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Classes $bm_class
+     * @param Classes $classes
      * @return \Illuminate\Http\Response
      */
-    public function index(Classes $bm_class)
+    public function index(Classes $classes)
     {
         $uid = Auth::id();
-        $data = $bm_class::where('uid', $uid)->paginate($this->per_page_num);
+        $data = $classes::where('uid', $uid)->paginate($this->per_page_num);
 
         return response()->json($this->returnData($data));
     }
@@ -26,15 +26,15 @@ class ClassesController extends Controller
      * 创建书签分类
      *
      * @param ClassesRequest $request
-     * @param Classes $bm_class
+     * @param Classes $classes
      * @return mixed
      */
-    public function store(ClassesRequest $request, Classes $bm_class)
+    public function store(ClassesRequest $request, Classes $classes)
     {
         $data = array_merge($request->all(), ['uid' => Auth::id()]);
 
         $response = $this->error('创建失败');
-        if ($bm_class->create($data)) {
+        if ($classes->create($data)) {
             $response = $this->success('创建成功');
         }
 

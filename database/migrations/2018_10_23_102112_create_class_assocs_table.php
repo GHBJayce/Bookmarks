@@ -22,7 +22,7 @@ class CreateClassAssocsTable extends Migration
             $table->index(['uid', 'cid', 'bm_id']);
 
             $table->foreign('uid')->references('uid')->on('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('cid')->references('cid')->on('class')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('cid')->references('cid')->on('classes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('bm_id')->references('bm_id')->on('bookmarks')->onUpdate('cascade')->onDelete('cascade');
         });
     }
